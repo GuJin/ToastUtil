@@ -1,4 +1,4 @@
-package com.gujin.utils.toast;
+package com.gujin.toast;
 
 import android.app.Application;
 import android.content.Context;
@@ -47,7 +47,7 @@ public class ToastUtil {
         /**
          * Show a toast , when it is showing , the text will be replaced if show again.
          */
-        REPLACEABLE;
+        REPLACEABLE
     }
 
     private ToastUtil() {}
@@ -66,6 +66,14 @@ public class ToastUtil {
 
     public static void show(CharSequence text, boolean durationLong) {
         show(text, durationLong, sDefaultMode);
+    }
+
+    public static void show(int resId, Mode mode) {
+        show(sContext.getText(resId), false, mode);
+    }
+
+    public static void show(CharSequence text, Mode mode) {
+        show(text, false, mode);
     }
 
     public static void show(int resId, boolean durationLong, Mode mode) {

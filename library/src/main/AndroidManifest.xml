@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.gujin.utils.toast">
+          package="com.gujin.toast">
 
     <application
         android:allowBackup="true"
