@@ -1,7 +1,7 @@
 # ToastUtil
 Simple ToastUtil for Android
 
-How do I use
+How do I use ToastUtil？
 =======
 See the [sample model][1] and [javadocs][2].
 
