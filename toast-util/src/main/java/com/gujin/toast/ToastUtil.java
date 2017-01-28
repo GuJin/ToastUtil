@@ -25,7 +25,7 @@ public class ToastUtil {
      * Initialize the util with the mode from user.
      *
      * @param context The context to use.
-     * @param mode    Is the text can replaced when the toast is showing. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @param mode    The default display mode tu use. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void initialize(Context context, Mode mode) {
         if (initialized) {
@@ -52,6 +52,9 @@ public class ToastUtil {
         initialized = true;
     }
 
+    /**
+     * Display mode
+     */
     public enum Mode {
 
         /**
@@ -60,12 +63,13 @@ public class ToastUtil {
         NORMAL,
 
         /**
-         * Show a toast , when it is showing , the text will be replaced if show again.  This mode could be user-definable.
+         * When the toast is shown to the user , the text will be replaced if call the show() method again.  This mode could be user-definable.
          */
         REPLACEABLE
     }
 
-    private ToastUtil() {}
+    private ToastUtil() {
+    }
 
     /**
      * Shot a toast with the text form a resource.
@@ -87,31 +91,64 @@ public class ToastUtil {
 
     /**
      * Shot a toast with the text form a resource.
-     * @param resId The resource id of the string resource to use.
+     *
+     * @param resId        The resource id of the string resource to use.
      * @param durationLong Whether the toast show for a long period of time?
      */
     public static void show(int resId, boolean durationLong) {
         show(sContext.getText(resId), durationLong);
     }
 
+    /**
+     * Show a toast.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     */
     public static void show(CharSequence text, boolean durationLong) {
         show(text, durationLong, sDefaultMode);
     }
 
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId The resource id of the string resource to use.
+     * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
     public static void show(int resId, Mode mode) {
         show(sContext.getText(resId), false, mode);
     }
 
+    /**
+     * Show a toast.
+     *
+     * @param text The text to show.
+     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
     public static void show(CharSequence text, Mode mode) {
         show(text, false, mode);
     }
 
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId        resId The resource id of the string resource to use.
+     * @param durationLong Whether the toast show for a long period of time?
+     * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
     public static void show(int resId, boolean durationLong, Mode mode) {
         show(sContext.getText(resId), durationLong, mode);
     }
 
+    /**
+     * Show a toast.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
     public static void show(CharSequence text, boolean durationLong, Mode mode) {
-        if (mode == Mode.NORMAL) {
+        if (mode == Mode.NORMAL || mode == null) {
             Toast.makeText(sContext, text, durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
             return;
         }
