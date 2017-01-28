@@ -27,34 +27,10 @@ dependencies {
 
 def siteUrl = 'https://github.com/GuJin/ToastUtil'
 def gitUrl = 'https://github.com/GuJin/ToastUtil.git'
+
 group = 'tech.gujin'
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'arr'
-                name 'Android ToastUtil'
-                url siteUrl
-                licenses {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                }
-                developers {
-                    developer {
-                        id 'sunrain'
-                        name 'gujin'
-                        email 'gujin93824@gmail.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
+version = '1.0.0'
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -87,3 +63,34 @@ bintray {
         publish = true
     }
 }
+
+task createPom {
+    pom {
+        project {
+            packaging 'aar'
+            artifactId 'toast-util'
+            name 'ToastUtil'
+            url siteUrl
+            inceptionYear '2017'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+            developers {
+                developer {
+                    name 'sunrain'
+                }
+            }
+        }
+    }.writeTo("$buildDir/poms/pom-default.xml")
+}
+build.dependsOn createPom
