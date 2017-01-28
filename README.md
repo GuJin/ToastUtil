@@ -1,6 +1,10 @@
 # ToastUtil
 Simple ToastUtil for Android
 
+How do I use
+=======
+See the [sample model][1] and [javadocs][2].
+
 License
 =======
 
@@ -17,3 +21,6 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+[1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/com/gujin/toast/sample
+[2]: https://gujin.github.io/ToastUtil/javadocs/1.0.0/index.html
