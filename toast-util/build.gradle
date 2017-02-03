@@ -31,6 +31,38 @@ def gitUrl = 'https://github.com/GuJin/ToastUtil.git'
 group = 'tech.gujin'
 version = '1.0.0'
 
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'ToastUtil'
+                url siteUrl
+                inceptionYear '2017'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'sunrain'
+                        name 'gujin'
+                        email '407185726@qq.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -56,41 +88,10 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "ToastUtil"
+        name = "toast-util"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
     }
 }
-
-task createPom {
-    pom {
-        project {
-            packaging 'aar'
-            artifactId 'toast-util'
-            name 'ToastUtil'
-            url siteUrl
-            inceptionYear '2017'
-
-            licenses {
-                license {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    distribution 'repo'
-                }
-            }
-            scm {
-                connection gitUrl
-                developerConnection gitUrl
-                url siteUrl
-            }
-            developers {
-                developer {
-                    name 'sunrain'
-                }
-            }
-        }
-    }.writeTo("$buildDir/poms/pom-default.xml")
-}
-build.dependsOn createPom
