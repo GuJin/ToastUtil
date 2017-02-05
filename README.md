@@ -5,6 +5,12 @@ How to use
 =======
 See the [sample model][1] and [javadocs][2].
 
+Gradle
+======
+```gradle
+compile 'tech.gujin:toast-util:1.0.0'
+```
+
 License
 =======
 
