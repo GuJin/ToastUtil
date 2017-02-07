@@ -1,5 +1,5 @@
 # ToastUtil
-[ ![Download](https://api.bintray.com/packages/gujin/maven/toast-util/images/download.svg) ](https://bintray.com/gujin/maven/toast-util/_latestVersion)
+[![API](https://img.shields.io/badge/API-4%2B-blue.svg?style=flat-square)](https://developer.android.com/about/versions/android-1.6.html)  [![Download](https://img.shields.io/badge/Download-1.0.0-green.svg?style=flat-square)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
 
 Simple ToastUtil for Android
 
