@@ -1,7 +1,7 @@
 # ToastUtil
 [![API](https://img.shields.io/badge/API-4%2B-blue.svg?style=flat-square)](https://developer.android.com/about/versions/android-1.6.html
 )
-[![Download](https://img.shields.io/badge/Download-1.0.0-green.svg?style=flat-square)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
+[![Download](https://img.shields.io/badge/Download-1.0.1-green.svg?style=flat-square)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
 
 Simple ToastUtil for Android
 
@@ -12,7 +12,7 @@ See the [sample model][1] and [javadocs][2].
 Gradle
 ======
 ```gradle
-compile 'tech.gujin:toast-util:1.0.0'
+compile 'tech.gujin:toast-util:1.0.1'
 ```
 
 License
@@ -32,5 +32,5 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/com/gujin/toast/sample
-[2]: https://gujin.github.io/ToastUtil/javadocs/1.0.0/index.html
+[1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/tech/gujin/toast/sample
+[2]: https://gujin.github.io/ToastUtil/javadocs/1.0.1/index.html
