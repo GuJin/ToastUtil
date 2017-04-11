@@ -1,8 +1,8 @@
-package com.gujin.toast.sample.application;
+package tech.gujin.toast.sample.application;
 
 import android.app.Application;
 
-import com.gujin.toast.ToastUtil;
+import tech.gujin.toast.ToastUtil;
 
 public class MyApplication extends Application {
     @Override

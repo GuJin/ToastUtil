@@ -1,10 +1,10 @@
-package com.gujin.toast.sample;
+package tech.gujin.toast.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.gujin.toast.ToastUtil;
+import tech.gujin.toast.ToastUtil;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
