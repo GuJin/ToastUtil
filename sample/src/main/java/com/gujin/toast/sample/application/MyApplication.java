@@ -9,5 +9,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.initialize(this);
+
+        // replaceable mode
+        // ToastUtil.initialize(this, ToastUtil.Mode.REPLACEABLE);
     }
 }
