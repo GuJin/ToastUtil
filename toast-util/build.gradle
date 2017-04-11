@@ -68,9 +68,12 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 task javadoc(type: Javadoc) {
-    options.encoding = "utf-8"
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+javadoc {
+    options.encoding = "utf-8"
+    options.locale = "en_US"
 }
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
