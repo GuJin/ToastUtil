@@ -11,6 +11,7 @@ public class ToastUtil {
     private static Context sContext;
     private static Mode sDefaultMode;
     private static Toast sToast;
+    private static int sDuration;
 
     /**
      * Initialize the util.
@@ -43,11 +44,8 @@ public class ToastUtil {
             sContext = context.getApplicationContext();
         }
 
-        if (mode == null) {
-            sDefaultMode = Mode.NORMAL;
-        } else {
-            sDefaultMode = mode;
-        }
+        // nullable
+        sDefaultMode = mode;
 
         initialized = true;
     }
@@ -148,15 +146,22 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void show(CharSequence text, boolean durationLong, Mode mode) {
-        if (mode == Mode.NORMAL || mode == null) {
-            Toast.makeText(sContext, text, durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+        int duration = durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
+
+        if (mode != Mode.REPLACEABLE) {
+            Toast.makeText(sContext, text, duration).show();
             return;
         }
 
-        if (sToast == null) {
-            sToast = Toast.makeText(sContext, text, durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        if (sToast == null || sDuration != duration) {
+            sDuration = duration;
+            sToast = Toast.makeText(sContext, text, duration);
         } else {
-            sToast.setText(text);
+            try {
+                sToast.setText(text);
+            } catch (RuntimeException e) {
+                sToast = Toast.makeText(sContext, text, duration);
+            }
         }
         sToast.show();
     }
