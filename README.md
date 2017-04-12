@@ -9,8 +9,11 @@ How to use
 =======
 See the [sample model][1] and [javadocs][2].
 
-Gradle
+Download
 ======
+You can download a jar from GitHub's [releases page][3].
+
+Or use Gradle:
 ```gradle
 compile 'tech.gujin:toast-util:1.0.1'
 ```
@@ -34,3 +37,4 @@ License
 
 [1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/tech/gujin/toast/sample
 [2]: https://gujin.github.io/ToastUtil/javadocs/1.0.1/index.html
+[3]: https://github.com/GuJin/ToastUtil/releases
