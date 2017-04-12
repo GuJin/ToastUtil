@@ -6,11 +6,11 @@
 Simple ToastUtil for Android
 
 How to use
-=======
+--------
 See the [sample model][1] and [javadocs][2].
 
 Download
-======
+--------
 You can download a jar from GitHub's [releases page][3].
 
 Or use Gradle:
@@ -19,7 +19,7 @@ compile 'tech.gujin:toast-util:1.0.1'
 ```
 
 License
-=======
+--------
 
     Copyright GuJin
 
