@@ -3,11 +3,7 @@
 )
 [![Download](https://img.shields.io/badge/Download-1.0.1-green.svg?style=flat-square)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
 
-Simple ToastUtil for Android
-
-How to use
---------
-See the [sample model][1] and [javadocs][2].
+Simple ToastUtil for Android.
 
 Download
 --------
@@ -17,6 +13,36 @@ Or use Gradle:
 ```gradle
 compile 'tech.gujin:toast-util:1.0.1'
 ```
+
+How to use
+--------
+Initialize in your application class
+```java
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ToastUtil.initialize(this);
+        // replaceable mode
+        // ToastUtil.initialize(this, ToastUtil.Mode.REPLACEABLE);
+    }
+}
+```
+Register application class in AndroidManifest.xml
+```xml
+<application
+    android:name="yourPackageName.MyApplication"
+    ...
+</application>      
+```
+Use
+```java
+ToastUtil.show("ToastUtil");
+```
+There are two modes in the util , introduce them through a gif.
+![](https://github.com/GuJin/ToastUtil/blob/master/screenshots/mode.gif)
+
+For more information please see the [sample model][1] and [javadocs][2].
 
 License
 --------
