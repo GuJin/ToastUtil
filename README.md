@@ -40,7 +40,9 @@ Use
 ToastUtil.show("ToastUtil");
 ```
 There are two modes in the util , introduce them through a gif.
+
 ![](https://github.com/GuJin/ToastUtil/blob/master/screenshots/mode.gif)
+
 
 For more information please see the [sample model][1] and [javadocs][2].
 
