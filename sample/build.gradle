@@ -5,8 +5,8 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.gujin.toast.sample"
-        minSdkVersion 4
+        applicationId "tech.gujin.toast.sample"
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"

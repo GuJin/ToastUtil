@@ -1,4 +1,4 @@
-package com.gujin.toast;
+package tech.gujin.toast;
 
 import android.app.Application;
 import android.content.Context;

@@ -29,7 +29,7 @@ def siteUrl = 'https://github.com/GuJin/ToastUtil'
 def gitUrl = 'https://github.com/GuJin/ToastUtil.git'
 
 group = 'tech.gujin'
-version = '1.0.0'
+version = '1.0.1'
 
 install {
     repositories.mavenInstaller {
