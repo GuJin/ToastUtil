@@ -40,6 +40,8 @@ Use
 ToastUtil.show("ToastUtil");
 ```
 There are two modes in the util , introduce them through a gif.
+- ToastUtil.Mode.NORMAL
+- ToastUtil.Mode.REPLACEABLE
 
 ![](https://github.com/GuJin/ToastUtil/blob/master/screenshots/mode.gif)
 
