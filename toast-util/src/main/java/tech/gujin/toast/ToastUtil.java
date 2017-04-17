@@ -2,6 +2,7 @@ package tech.gujin.toast;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ public class ToastUtil {
     private static Mode sDefaultMode;
     private static Toast sToast;
     private static int sDuration;
+    private static ToastUtilHandler sHandler;
 
     /**
      * Initialize the util.
@@ -46,6 +48,7 @@ public class ToastUtil {
 
         // nullable
         sDefaultMode = mode;
+        sHandler = new ToastUtilHandler(Looper.getMainLooper());
 
         initialized = true;
     }
@@ -66,16 +69,13 @@ public class ToastUtil {
         REPLACEABLE
     }
 
-    private ToastUtil() {
-    }
-
     /**
      * Shot a toast with the text form a resource.
      *
      * @param resId The resource id of the string resource to use.
      */
     public static void show(int resId) {
-        show(sContext.getText(resId));
+        show(sContext.getText(resId), false, sDefaultMode);
     }
 
     /**
@@ -84,7 +84,7 @@ public class ToastUtil {
      * @param text The text to show.
      */
     public static void show(CharSequence text) {
-        show(text, false);
+        show(text, false, sDefaultMode);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      */
     public static void show(int resId, boolean durationLong) {
-        show(sContext.getText(resId), durationLong);
+        show(sContext.getText(resId), durationLong, sDefaultMode);
     }
 
     /**
@@ -164,5 +164,114 @@ public class ToastUtil {
             }
         }
         sToast.show();
+    }
+
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId The resource id of the string resource to use.
+     */
+    public static void postShow(int resId) {
+        ToastInfo info = new ToastInfo();
+        info.resId = resId;
+        info.durationLong = false;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
+    }
+
+    /**
+     * Shot a toast.
+     *
+     * @param text The text to show.
+     */
+    public static void postShow(CharSequence text) {
+        ToastInfo info = new ToastInfo();
+        info.text = text;
+        info.durationLong = false;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    }
+
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId        The resource id of the string resource to use.
+     * @param durationLong Whether the toast show for a long period of time?
+     */
+    public static void postShow(int resId, boolean durationLong) {
+        ToastInfo info = new ToastInfo();
+        info.resId = resId;
+        info.durationLong = durationLong;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     */
+    public static void postShow(CharSequence text, boolean durationLong) {
+        ToastInfo info = new ToastInfo();
+        info.text = text;
+        info.durationLong = durationLong;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    }
+
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId The resource id of the string resource to use.
+     * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
+    public static void postShow(int resId, Mode mode) {
+        ToastInfo info = new ToastInfo();
+        info.resId = resId;
+        info.mode = mode;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text The text to show.
+     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
+    public static void postShow(CharSequence text, Mode mode) {
+        ToastInfo info = new ToastInfo();
+        info.text = text;
+        info.mode = mode;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    }
+
+    /**
+     * Shot a toast with the text form a resource.
+     *
+     * @param resId        resId The resource id of the string resource to use.
+     * @param durationLong Whether the toast show for a long period of time?
+     * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
+    public static void postShow(int resId, boolean durationLong, Mode mode) {
+        ToastInfo info = new ToastInfo();
+        info.resId = resId;
+        info.durationLong = durationLong;
+        info.mode = mode;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
+    public static void postShow(CharSequence text, boolean durationLong, Mode mode) {
+        ToastInfo info = new ToastInfo();
+        info.text = text;
+        info.durationLong = durationLong;
+        info.mode = mode;
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    }
+
+    private ToastUtil() {
     }
 }
