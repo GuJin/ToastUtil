@@ -146,7 +146,7 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void show(CharSequence text, boolean durationLong, Mode mode) {
-        int duration = durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
+        final int duration = durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
 
         if (mode != Mode.REPLACEABLE) {
             Toast.makeText(sContext, text, duration).show();
@@ -172,7 +172,7 @@ public class ToastUtil {
      * @param resId The resource id of the string resource to use.
      */
     public static void postShow(int resId) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.resId = resId;
         info.durationLong = false;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
@@ -184,7 +184,7 @@ public class ToastUtil {
      * @param text The text to show.
      */
     public static void postShow(CharSequence text) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.text = text;
         info.durationLong = false;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
@@ -197,7 +197,7 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      */
     public static void postShow(int resId, boolean durationLong) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.resId = resId;
         info.durationLong = durationLong;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
@@ -210,7 +210,7 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      */
     public static void postShow(CharSequence text, boolean durationLong) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.text = text;
         info.durationLong = durationLong;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
@@ -223,7 +223,7 @@ public class ToastUtil {
      * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void postShow(int resId, Mode mode) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.resId = resId;
         info.mode = mode;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
@@ -236,7 +236,7 @@ public class ToastUtil {
      * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void postShow(CharSequence text, Mode mode) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.text = text;
         info.mode = mode;
         sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
@@ -250,7 +250,7 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void postShow(int resId, boolean durationLong, Mode mode) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.resId = resId;
         info.durationLong = durationLong;
         info.mode = mode;
@@ -265,7 +265,7 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
     public static void postShow(CharSequence text, boolean durationLong, Mode mode) {
-        ToastInfo info = new ToastInfo();
+        final ToastInfo info = new ToastInfo();
         info.text = text;
         info.durationLong = durationLong;
         info.mode = mode;
