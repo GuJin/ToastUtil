@@ -7,20 +7,40 @@
     >
 
     <Button
-        android:id="@+id/btn_show"
+        android:id="@+id/btn_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show"/>
+        android:text="@string/normal_mode"/>
 
     <Button
         android:id="@+id/btn_replaceable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_in_replaceable_mode"/>
+        android:text="@string/replaceable_mode"/>
 
     <Button
-        android:id="@+id/btn_long"
+        android:id="@+id/btn_long_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_for_a_long_period_of_time"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/length_long_normal"/>
+
+    <Button
+        android:id="@+id/btn_long_replaceable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/length_long_replaceable"/>
+
+    <Button
+        android:id="@+id/btn_sub_thread_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/sub_thread_normal"/>
+
+    <Button
+        android:id="@+id/btn_sub_thread_replaceable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sub_thread_replaceable"/>
 </LinearLayout>

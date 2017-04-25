@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ToastUtil Sample</string>
-    <string name="show">show</string>
-    <string name="show_in_replaceable_mode">show in replaceable mode</string>
-    <string name="show_for_a_long_period_of_time">show for a long period of time</string>
+    <string name="normal_mode">normal mode</string>
+    <string name="replaceable_mode">replaceable mode</string>
+    <string name="length_long_normal">length long (normal)</string>
+    <string name="length_long_replaceable">length long (replaceable)</string>
+    <string name="sub_thread_normal">sub-thread (normal)</string>
+    <string name="sub_thread_replaceable">sub-thread (replaceable)</string>
 </resources>
