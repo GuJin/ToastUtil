@@ -7,16 +7,18 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class ToastUtil {
+
     private static final String TAG = "ToastUtil";
+
     private static boolean initialized;
     private static Context sContext;
     private static Mode sDefaultMode;
+    private static ToastUtilHandler sHandler;
     private static Toast sToast;
     private static int sDuration;
-    private static ToastUtilHandler sHandler;
 
     /**
-     * Initialize the util.
+     * Initialize util.
      *
      * @param context The context to use.
      */
@@ -25,7 +27,7 @@ public class ToastUtil {
     }
 
     /**
-     * Initialize the util with the mode from user.
+     * Initialize util with the mode from user.
      *
      * @param context The context to use.
      * @param mode    The default display mode tu use. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
