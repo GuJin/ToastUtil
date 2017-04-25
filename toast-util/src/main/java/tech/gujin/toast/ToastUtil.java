@@ -70,7 +70,7 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
      *
      * @param resId The resource id of the string resource to use.
      */
@@ -79,7 +79,7 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast.
+     * Show a toast.
      *
      * @param text The text to show.
      */
@@ -88,7 +88,7 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
      *
      * @param resId        The resource id of the string resource to use.
      * @param durationLong Whether the toast show for a long period of time?
@@ -108,7 +108,7 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
      *
      * @param resId The resource id of the string resource to use.
      * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
@@ -128,7 +128,7 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
      *
      * @param resId        resId The resource id of the string resource to use.
      * @param durationLong Whether the toast show for a long period of time?
@@ -167,9 +167,11 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
+     * This method can be invoked from non-UI thread.
      *
      * @param resId The resource id of the string resource to use.
+     * @see #show(int)
      */
     public static void postShow(int resId) {
         final ToastInfo info = new ToastInfo();
@@ -179,9 +181,11 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast.
+     * Show a toast.
+     * This method can be invoked from non-UI thread.
      *
      * @param text The text to show.
+     * @see #show(CharSequence)
      */
     public static void postShow(CharSequence text) {
         final ToastInfo info = new ToastInfo();
@@ -191,10 +195,12 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
+     * This method can be invoked from non-UI thread.
      *
      * @param resId        The resource id of the string resource to use.
      * @param durationLong Whether the toast show for a long period of time?
+     * @see #show(int, boolean)
      */
     public static void postShow(int resId, boolean durationLong) {
         final ToastInfo info = new ToastInfo();
@@ -205,9 +211,11 @@ public class ToastUtil {
 
     /**
      * Show a toast.
+     * This method can be invoked from non-UI thread.
      *
      * @param text         The text to show.
      * @param durationLong Whether the toast show for a long period of time?
+     * @see #show(CharSequence, boolean)
      */
     public static void postShow(CharSequence text, boolean durationLong) {
         final ToastInfo info = new ToastInfo();
@@ -217,10 +225,12 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
+     * This method can be invoked from non-UI thread.
      *
      * @param resId The resource id of the string resource to use.
      * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @see #show(int, Mode)
      */
     public static void postShow(int resId, Mode mode) {
         final ToastInfo info = new ToastInfo();
@@ -231,9 +241,11 @@ public class ToastUtil {
 
     /**
      * Show a toast.
+     * This method can be invoked from non-UI thread.
      *
      * @param text The text to show.
      * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @see #show(CharSequence, Mode)
      */
     public static void postShow(CharSequence text, Mode mode) {
         final ToastInfo info = new ToastInfo();
@@ -243,11 +255,13 @@ public class ToastUtil {
     }
 
     /**
-     * Shot a toast with the text form a resource.
+     * Show a toast with the text form a resource.
+     * This method can be invoked from non-UI thread.
      *
      * @param resId        resId The resource id of the string resource to use.
      * @param durationLong Whether the toast show for a long period of time?
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @see #show(int, boolean, Mode)
      */
     public static void postShow(int resId, boolean durationLong, Mode mode) {
         final ToastInfo info = new ToastInfo();
@@ -259,10 +273,12 @@ public class ToastUtil {
 
     /**
      * Show a toast.
+     * This method can be invoked from non-UI thread.
      *
      * @param text         The text to show.
      * @param durationLong Whether the toast show for a long period of time?
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @see #show(CharSequence, boolean, Mode)
      */
     public static void postShow(CharSequence text, boolean durationLong, Mode mode) {
         final ToastInfo info = new ToastInfo();
