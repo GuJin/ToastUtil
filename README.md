@@ -67,5 +67,5 @@ License
     limitations under the License.
 
 [1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/tech/gujin/toast/sample
-[2]: https://gujin.github.io/ToastUtil/javadocs/1.0.1/index.html
+[2]: https://gujin.github.io/ToastUtil/javadocs/1.1.0/index.html
 [3]: https://github.com/GuJin/ToastUtil/releases
