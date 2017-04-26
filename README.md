@@ -12,7 +12,7 @@ You can download a jar from GitHub's [releases page][3].
 
 Or use Gradle:
 ```gradle
-compile 'tech.gujin:toast-util:1.0.1'
+compile 'tech.gujin:toast-util:1.1.0'
 ```
 
 How to use
@@ -39,6 +39,10 @@ Register application class in AndroidManifest.xml
 Use
 ```java
 ToastUtil.show("ToastUtil");
+```
+Or in sub-thread
+```java
+ToastUtil.postShow("ToastUtil");
 ```
 There are two modes in the util , introduce them through a gif.
 - ToastUtil.Mode.NORMAL
