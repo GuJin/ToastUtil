@@ -37,6 +37,7 @@ install {
             project {
                 packaging 'aar'
                 name 'ToastUtil'
+                description 'Android ToastUtil'
                 url siteUrl
                 inceptionYear '2017'
                 licenses {
