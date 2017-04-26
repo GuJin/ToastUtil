@@ -1,5 +1,6 @@
 package tech.gujin.toast;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.os.Looper;
@@ -10,8 +11,9 @@ public class ToastUtil {
 
     private static final String TAG = "ToastUtil";
 
-    private static boolean initialized;
+    @SuppressLint("StaticFieldLeak")
     private static Context sContext;
+    private static boolean initialized;
     private static Mode sDefaultMode;
     private static ToastUtilHandler sHandler;
     private static Toast sToast;

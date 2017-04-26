@@ -1,7 +1,8 @@
 # ToastUtil
-[![API](https://img.shields.io/badge/API-4%2B-blue.svg?style=flat-square)](https://developer.android.com/about/versions/android-1.6.html
+[![API](https://img.shields.io/badge/API-4%2B-blue.svg)](https://developer.android.com/about/versions/android-1.6.html
 )
-[![Download](https://img.shields.io/badge/Download-1.0.1-green.svg?style=flat-square)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
+[![Download](https://img.shields.io/badge/Download-1.0.1-green.svg)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
+[![Build Status](https://travis-ci.org/GuJin/ToastUtil.svg?branch=master)](https://travis-ci.org/GuJin/ToastUtil)
 
 Simple ToastUtil for Android.
 
