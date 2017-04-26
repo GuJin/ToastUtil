@@ -1,7 +1,6 @@
 package tech.gujin.toast;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
@@ -44,11 +43,7 @@ public class ToastUtil {
             throw new NullPointerException("context can not be null");
         }
 
-        if (context instanceof Application) {
-            sContext = context;
-        } else {
-            sContext = context.getApplicationContext();
-        }
+        sContext = context.getApplicationContext();
 
         // nullable
         sDefaultMode = mode;
