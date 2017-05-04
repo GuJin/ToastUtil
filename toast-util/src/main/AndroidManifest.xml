@@ -1,7 +1,4 @@
-<manifest package="tech.gujin.toast"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="tech.gujin.toast">
 
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true"/>
+    <application/>
 </manifest>
