@@ -12,7 +12,7 @@ You can download a jar from GitHub's [releases page][3].
 
 Or use Gradle:
 ```gradle
-compile 'tech.gujin:toast-util:1.1.0'
+compile 'tech.gujin:toast-util:1.1.1'
 ```
 
 How to use
@@ -71,5 +71,5 @@ License
     limitations under the License.
 
 [1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/tech/gujin/toast/sample
-[2]: https://gujin.github.io/ToastUtil/javadocs/1.1.0/index.html
+[2]: https://gujin.github.io/ToastUtil/javadocs/1.1.1/index.html
 [3]: https://github.com/GuJin/ToastUtil/releases
