@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/GuJin/ToastUtil.svg?branch=master)](https://travis-ci.org/GuJin/ToastUtil)
 
 Simple ToastUtil for Android.
+[中文介绍][4]
 
 Download
 --------
@@ -73,3 +74,4 @@ License
 [1]: https://github.com/GuJin/ToastUtil/tree/master/sample/src/main/java/tech/gujin/toast/sample
 [2]: https://gujin.github.io/ToastUtil/javadocs/1.1.1/index.html
 [3]: https://github.com/GuJin/ToastUtil/releases
+[4]:http://www.jianshu.com/p/732cfe6bd67c
