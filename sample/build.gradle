@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion Versions.compileSdkVersion
 
     defaultConfig {
         applicationId "tech.gujin.toast.sample"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion Versions.targetSdkVersion
         versionCode 3
         versionName "1.1.1"
     }
@@ -20,6 +19,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':toast-util')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':toast-util')
 }

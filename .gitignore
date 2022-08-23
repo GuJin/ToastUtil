@@ -25,7 +25,11 @@ captures/
 # Intellij
 *.iml
 .idea/
-!.idea/encodings.xml
 
 # Keystore files
 *.jks
+
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx
