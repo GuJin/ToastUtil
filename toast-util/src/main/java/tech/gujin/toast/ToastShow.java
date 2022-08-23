@@ -1,5 +1,6 @@
 package tech.gujin.toast;
 
+import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import androidx.annotation.Nullable;
 class ToastShow {
 
     private static final ToastUtilHandler sHandler;
-    private static Toast sToast;
+    private static Toast sReplaceToast;
     private static int sDuration;
 
     static {
@@ -27,22 +28,35 @@ class ToastShow {
             mode = ToastConfig.getDefaultMode();
         }
 
-        if (mode != ToastUtil.Mode.REPLACEABLE) {
+        if (ToastUtil.Mode.NORMAL == mode) {
             Toast.makeText(ToastConfig.getContext(), text, duration).show();
             return;
         }
 
-        if (sToast == null || sDuration != duration) {
+        if (sReplaceToast == null || sDuration != duration) {
             sDuration = duration;
-            sToast = Toast.makeText(ToastConfig.getContext(), text, duration);
+            sReplaceToast = makeReplaceToast(text, duration);
         } else {
             try {
-                sToast.setText(text);
+                sReplaceToast.setText(text);
             } catch (RuntimeException e) {
-                sToast = Toast.makeText(ToastConfig.getContext(), text, duration);
+                sReplaceToast = makeReplaceToast(text, duration);
             }
         }
-        sToast.show();
+        sReplaceToast.show();
+    }
+
+    private static Toast makeReplaceToast(CharSequence text, int duration) {
+        Toast toast = Toast.makeText(ToastConfig.getContext(), text, duration);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            toast.addCallback(new Toast.Callback() {
+                @Override
+                public void onToastHidden() {
+                    sReplaceToast = null;
+                }
+            });
+        }
+        return toast;
     }
 
     public static void postShow(CharSequence text, boolean durationLong, ToastUtil.Mode mode) {
