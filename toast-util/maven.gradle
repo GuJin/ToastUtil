@@ -73,10 +73,8 @@ afterEvaluate {
             }
         }
     }
+    signing {
+        sign publishing.publications.release
+    }
 }
 
-signing {
-    required { isReleaseBuild() }
-    println 'Signing archives...'
-    sign configurations.archives
-}
