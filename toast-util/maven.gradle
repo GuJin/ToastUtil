@@ -1,0 +1,70 @@
+def sitePath = 'github.com/GuJin/ToastUtil'
+def gitPath = sitePath + '.git'
+def siteUrl = 'https://' + sitePath
+def scmUrl = siteUrl
+def scmConnection = "scm:git:git://" + gitPath
+def scmDevConnection = "scm:git:ssh://" + gitPath
+
+Properties properties = new Properties()
+boolean isHasFile = false
+if (project.rootProject.findProject('local.properties') != null) {
+    isHasFile = true
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+def mavenUrl = isHasFile ? properties.getProperty("maven.url") : ""
+def mavenUser = isHasFile ? properties.getProperty("maven.user") : ""
+def mavenPassword = isHasFile ? properties.getProperty("maven.password") : ""
+
+afterEvaluate {
+    print "afterEvaluate running .."
+    publishing {
+        publications {
+
+            release(MavenPublication) {
+                from components.release
+                groupId = 'tech.gujin'
+                artifactId = 'toast-util'
+                version = Versions.versionName
+                artifact javadocJar
+                artifact sourcesJar
+
+                pom {
+                    name = 'ToastUtil'
+                    description = 'Android ToastUtil'
+                    url = siteUrl
+                    packaging = 'aar'
+                    inceptionYear = '2017'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution = 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'sunrain'
+                            name = 'gujin'
+                            email = '407185726@qq.com'
+                        }
+                    }
+                    scm {
+                        url = scmUrl
+                        connection = scmConnection
+                        developerConnection = scmDevConnection
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                url(mavenUrl)
+                credentials {
+                    username = mavenUser
+                    password = mavenPassword
+                }
+            }
+        }
+    }
+}

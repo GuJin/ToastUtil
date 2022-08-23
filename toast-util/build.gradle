@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+apply from: project.file('maven.gradle')
 
 android {
     compileSdkVersion Versions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 4
+        minSdkVersion Versions.minSdkVersion
         resourcePrefix "toast_util_"
         targetSdkVersion Versions.targetSdkVersion
-        versionCode 3
-        versionName "1.1.1"
+        versionCode Versions.versionCode
+        versionName Versions.versionName
     }
     buildTypes {
         release {
@@ -23,84 +23,31 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(Androidx.annotation)
-    implementation(Androidx.startup)
-}
-
-def siteUrl = 'https://github.com/GuJin/ToastUtil'
-def gitUrl = 'https://github.com/GuJin/ToastUtil.git'
-
-group = 'tech.gujin'
-version = '1.1.1'
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                name 'ToastUtil'
-                description 'Android ToastUtil'
-                url siteUrl
-                inceptionYear '2017'
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'sunrain'
-                        name 'gujin'
-                        email '407185726@qq.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
 }
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
+    println "sourcesJar srcDirs=${project.android.sourceSets.main.java.sourceFiles}"
 }
+
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    println "javadoc =${classpath}"
 }
+
 javadoc {
     options.encoding = "utf-8"
     options.locale = "en_US"
 }
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
+
 artifacts {
     archives javadocJar
     archives sourcesJar
 }
-Properties properties = new Properties()
-boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null) {
-    isHasFile = true
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
-//bintray {
-//    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
-//    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
-//    configurations = ['archives']
-//    pkg {
-//        repo = "maven"
-//        name = "toast-util"
-//        websiteUrl = siteUrl
-//        vcsUrl = gitUrl
-//        licenses = ["Apache-2.0"]
-//        publish = true
-//    }
-//}
