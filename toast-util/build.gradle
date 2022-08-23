@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
 apply from: project.file('maven.gradle')
 
 android {
@@ -29,13 +28,11 @@ dependencies {
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
-    println "sourcesJar srcDirs=${project.android.sourceSets.main.java.sourceFiles}"
 }
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    println "javadoc =${classpath}"
 }
 
 javadoc {

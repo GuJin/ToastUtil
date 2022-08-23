@@ -1,3 +1,5 @@
+apply plugin: 'signing'
+
 def sitePath = 'github.com/GuJin/ToastUtil'
 def gitPath = sitePath + '.git'
 def siteUrl = 'https://' + sitePath
@@ -7,7 +9,7 @@ def scmDevConnection = "scm:git:ssh://" + gitPath
 
 Properties properties = new Properties()
 boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null) {
+if (project.rootProject.file('local.properties').exists()) {
     isHasFile = true
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
@@ -17,7 +19,7 @@ def mavenUser = isHasFile ? properties.getProperty("maven.user") : ""
 def mavenPassword = isHasFile ? properties.getProperty("maven.password") : ""
 
 afterEvaluate {
-    print "afterEvaluate running .."
+    println "afterEvaluate running .."
     publishing {
         publications {
 
@@ -67,4 +69,10 @@ afterEvaluate {
             }
         }
     }
+}
+
+signing {
+    required { isReleaseBuild() }
+    println 'Signing archives...'
+    sign configurations.archives
 }
