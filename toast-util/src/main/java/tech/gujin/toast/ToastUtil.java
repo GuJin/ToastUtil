@@ -1,53 +1,51 @@
 package tech.gujin.toast;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public class ToastUtil {
 
     private static final String TAG = "ToastUtil";
 
-    @SuppressLint("StaticFieldLeak")
-    private static Context sContext;
     private static boolean initialized;
-    private static Mode sDefaultMode;
-    private static ToastUtilHandler sHandler;
-    private static Toast sToast;
-    private static int sDuration;
 
     /**
      * Initialize util.
      *
      * @param context The context to use.
      */
-    public static void initialize(Context context) {
+    public static void initialize(@NonNull Context context) {
         initialize(context, Mode.NORMAL);
     }
 
     /**
      * Initialize util with the mode from user.
      *
-     * @param context The context to use.
-     * @param mode    The default display mode tu use. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @param context     The context to use.
+     * @param defaultMode The default display mode tu use. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
-    public static void initialize(Context context, Mode mode) {
+    public static void initialize(@NonNull Context context, @NonNull Mode defaultMode) {
         if (initialized) {
             Log.w(TAG, "Invalid initialize, ToastUtil is already initialized");
             return;
         }
 
+        //noinspection ConstantConditions
         if (context == null) {
             throw new NullPointerException("context can not be null");
         }
 
-        sContext = context.getApplicationContext();
+        //noinspection ConstantConditions
+        if (defaultMode == null) {
+            defaultMode = Mode.NORMAL;
+        }
 
-        // nullable
-        sDefaultMode = mode;
-        sHandler = new ToastUtilHandler(Looper.getMainLooper());
+        ToastConfig.setContext(context.getApplicationContext());
+        ToastConfig.setDefaultMode(defaultMode);
 
         initialized = true;
     }
@@ -74,16 +72,7 @@ public class ToastUtil {
      * @param resId The resource id of the string resource to use.
      */
     public static void show(int resId) {
-        show(sContext.getText(resId), false, sDefaultMode);
-    }
-
-    /**
-     * Show a toast.
-     *
-     * @param text The text to show.
-     */
-    public static void show(CharSequence text) {
-        show(text, false, sDefaultMode);
+        show(resId, false);
     }
 
     /**
@@ -93,17 +82,7 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      */
     public static void show(int resId, boolean durationLong) {
-        show(sContext.getText(resId), durationLong, sDefaultMode);
-    }
-
-    /**
-     * Show a toast.
-     *
-     * @param text         The text to show.
-     * @param durationLong Whether the toast show for a long period of time?
-     */
-    public static void show(CharSequence text, boolean durationLong) {
-        show(text, durationLong, sDefaultMode);
+        show(resId, durationLong, null);
     }
 
     /**
@@ -112,18 +91,8 @@ public class ToastUtil {
      * @param resId The resource id of the string resource to use.
      * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
-    public static void show(int resId, Mode mode) {
-        show(sContext.getText(resId), false, mode);
-    }
-
-    /**
-     * Show a toast.
-     *
-     * @param text The text to show.
-     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
-     */
-    public static void show(CharSequence text, Mode mode) {
-        show(text, false, mode);
+    public static void show(int resId, @Nullable Mode mode) {
+        show(resId, false, mode);
     }
 
     /**
@@ -133,8 +102,37 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
-    public static void show(int resId, boolean durationLong, Mode mode) {
-        show(sContext.getText(resId), durationLong, mode);
+    public static void show(int resId, boolean durationLong, @Nullable Mode mode) {
+        show(getText(resId), durationLong, mode);
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text The text to show.
+     */
+    public static void show(CharSequence text) {
+        show(text, false);
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     */
+    public static void show(CharSequence text, boolean durationLong) {
+        show(text, durationLong, null);
+    }
+
+    /**
+     * Show a toast.
+     *
+     * @param text The text to show.
+     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     */
+    public static void show(CharSequence text, @Nullable Mode mode) {
+        show(text, false, mode);
     }
 
     /**
@@ -144,25 +142,8 @@ public class ToastUtil {
      * @param durationLong Whether the toast show for a long period of time?
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
-    public static void show(CharSequence text, boolean durationLong, Mode mode) {
-        final int duration = durationLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
-
-        if (mode != Mode.REPLACEABLE) {
-            Toast.makeText(sContext, text, duration).show();
-            return;
-        }
-
-        if (sToast == null || sDuration != duration) {
-            sDuration = duration;
-            sToast = Toast.makeText(sContext, text, duration);
-        } else {
-            try {
-                sToast.setText(text);
-            } catch (RuntimeException e) {
-                sToast = Toast.makeText(sContext, text, duration);
-            }
-        }
-        sToast.show();
+    public static void show(CharSequence text, boolean durationLong, @Nullable Mode mode) {
+        ToastShow.show(text, durationLong, mode);
     }
 
     /**
@@ -172,25 +153,8 @@ public class ToastUtil {
      * @param resId The resource id of the string resource to use.
      * @see #show(int)
      */
-    public static void postShow(int resId) {
-        final ToastInfo info = new ToastInfo();
-        info.resId = resId;
-        info.durationLong = false;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
-    }
-
-    /**
-     * Show a toast.
-     * This method can be invoked from non-UI thread.
-     *
-     * @param text The text to show.
-     * @see #show(CharSequence)
-     */
-    public static void postShow(CharSequence text) {
-        final ToastInfo info = new ToastInfo();
-        info.text = text;
-        info.durationLong = false;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    public static void postShow(@StringRes int resId) {
+        postShow(resId, false);
     }
 
     /**
@@ -202,25 +166,7 @@ public class ToastUtil {
      * @see #show(int, boolean)
      */
     public static void postShow(int resId, boolean durationLong) {
-        final ToastInfo info = new ToastInfo();
-        info.resId = resId;
-        info.durationLong = durationLong;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
-    }
-
-    /**
-     * Show a toast.
-     * This method can be invoked from non-UI thread.
-     *
-     * @param text         The text to show.
-     * @param durationLong Whether the toast show for a long period of time?
-     * @see #show(CharSequence, boolean)
-     */
-    public static void postShow(CharSequence text, boolean durationLong) {
-        final ToastInfo info = new ToastInfo();
-        info.text = text;
-        info.durationLong = durationLong;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+        postShow(getText(resId), durationLong);
     }
 
     /**
@@ -231,26 +177,8 @@ public class ToastUtil {
      * @param mode  The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      * @see #show(int, Mode)
      */
-    public static void postShow(int resId, Mode mode) {
-        final ToastInfo info = new ToastInfo();
-        info.resId = resId;
-        info.mode = mode;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
-    }
-
-    /**
-     * Show a toast.
-     * This method can be invoked from non-UI thread.
-     *
-     * @param text The text to show.
-     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
-     * @see #show(CharSequence, Mode)
-     */
-    public static void postShow(CharSequence text, Mode mode) {
-        final ToastInfo info = new ToastInfo();
-        info.text = text;
-        info.mode = mode;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    public static void postShow(int resId, @Nullable Mode mode) {
+        postShow(resId, false, mode);
     }
 
     /**
@@ -262,12 +190,43 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      * @see #show(int, boolean, Mode)
      */
-    public static void postShow(int resId, boolean durationLong, Mode mode) {
-        final ToastInfo info = new ToastInfo();
-        info.resId = resId;
-        info.durationLong = durationLong;
-        info.mode = mode;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_RES_ID, info).sendToTarget();
+    public static void postShow(int resId, boolean durationLong, @Nullable Mode mode) {
+        postShow(getText(resId), durationLong, mode);
+    }
+
+    /**
+     * Show a toast.
+     * This method can be invoked from non-UI thread.
+     *
+     * @param text The text to show.
+     * @see #show(CharSequence)
+     */
+    public static void postShow(CharSequence text) {
+        postShow(text, false);
+    }
+
+    /**
+     * Show a toast.
+     * This method can be invoked from non-UI thread.
+     *
+     * @param text         The text to show.
+     * @param durationLong Whether the toast show for a long period of time?
+     * @see #show(CharSequence, boolean)
+     */
+    public static void postShow(CharSequence text, boolean durationLong) {
+        postShow(text, durationLong, null);
+    }
+
+    /**
+     * Show a toast.
+     * This method can be invoked from non-UI thread.
+     *
+     * @param text The text to show.
+     * @param mode The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
+     * @see #show(CharSequence, Mode)
+     */
+    public static void postShow(CharSequence text, @Nullable Mode mode) {
+        postShow(text, false, mode);
     }
 
     /**
@@ -279,12 +238,12 @@ public class ToastUtil {
      * @param mode         The display mode to use.  Either {@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      * @see #show(CharSequence, boolean, Mode)
      */
-    public static void postShow(CharSequence text, boolean durationLong, Mode mode) {
-        final ToastInfo info = new ToastInfo();
-        info.text = text;
-        info.durationLong = durationLong;
-        info.mode = mode;
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    public static void postShow(CharSequence text, boolean durationLong, @Nullable Mode mode) {
+        ToastShow.postShow(text, durationLong, mode);
+    }
+
+    private static CharSequence getText(@StringRes int resId) {
+        return ToastConfig.getContext().getText(resId);
     }
 
     private ToastUtil() {
