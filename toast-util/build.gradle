@@ -23,7 +23,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation(Androidx.annotation)
+    implementation(Androidx.annotationx)
 }
 
 task sourcesJar(type: Jar) {

@@ -46,6 +46,11 @@ class ToastShow {
         sReplaceToast.show();
     }
 
+    static void postShow(CharSequence text, boolean durationLong, @Nullable ToastUtil.Mode mode) {
+        final ToastInfo info = new ToastInfo(text, durationLong, mode);
+        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
+    }
+
     private static Toast makeReplaceToast(CharSequence text, int duration) {
         Toast toast = Toast.makeText(ToastConfig.getContext(), text, duration);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -57,10 +62,5 @@ class ToastShow {
             });
         }
         return toast;
-    }
-
-    public static void postShow(CharSequence text, boolean durationLong, ToastUtil.Mode mode) {
-        final ToastInfo info = new ToastInfo(text, durationLong, mode);
-        sHandler.obtainMessage(ToastUtilHandler.MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
     }
 }

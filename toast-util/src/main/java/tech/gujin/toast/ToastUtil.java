@@ -18,7 +18,7 @@ public class ToastUtil {
      *
      * @param context The context to use.
      */
-    public static void initialize(@NonNull Context context) {
+    public synchronized static void initialize(@NonNull Context context) {
         initialize(context, Mode.NORMAL);
     }
 
@@ -28,7 +28,7 @@ public class ToastUtil {
      * @param context     The context to use.
      * @param defaultMode The default display mode tu use. Either{@link Mode#NORMAL} or {@link Mode#REPLACEABLE}
      */
-    public static void initialize(@NonNull Context context, @NonNull Mode defaultMode) {
+    public synchronized static void initialize(@NonNull Context context, @NonNull Mode defaultMode) {
         if (initialized) {
             Log.w(TAG, "Invalid initialize, ToastUtil is already initialized");
             return;

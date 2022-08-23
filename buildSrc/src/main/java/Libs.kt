@@ -1,5 +1,5 @@
 object Androidx {
 
-    const val annotation = "androidx.annotation:annotation:${Versions.androidx_annotation}"
+    const val annotationx = "androidx.annotation:annotation:${Versions.androidx_annotation}" // do not named annotation, clash with Class#isAnnotation
 
 }
