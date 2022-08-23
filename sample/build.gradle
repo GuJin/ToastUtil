@@ -5,10 +5,10 @@ android {
 
     defaultConfig {
         applicationId "tech.gujin.toast.sample"
-        minSdkVersion 14
+        minSdkVersion Versions.minSdkVersion
         targetSdkVersion Versions.targetSdkVersion
-        versionCode 3
-        versionName "1.1.1"
+        versionCode Versions.versionCode
+        versionName Versions.versionName
     }
     buildTypes {
         release {
