@@ -1,7 +1,7 @@
 # ToastUtil
 [![API](https://img.shields.io/badge/API-4%2B-green.svg)](https://developer.android.com/about/versions/android-1.6.html
 )
-[![Download](https://api.bintray.com/packages/gujin/maven/toast-util/images/download.svg)](https://bintray.com/gujin/maven/toast-util/_latestVersion)
+[![Download](https://maven-badges.herokuapp.com/maven-central/tech.gujin/toast-util/badge.svg)]((https://maven-badges.herokuapp.com/maven-central/tech.gujin/toast-util))
 [![Build Status](https://travis-ci.org/GuJin/ToastUtil.svg?branch=master)](https://travis-ci.org/GuJin/ToastUtil)
 
 Simple ToastUtil for Android.
@@ -14,7 +14,7 @@ You can download a jar from GitHub's [releases page][3].
 
 Or use Gradle:
 ```gradle
-compile 'tech.gujin:toast-util:1.1.1'
+compile 'tech.gujin:toast-util:1.2.0'
 ```
 
 How to use
