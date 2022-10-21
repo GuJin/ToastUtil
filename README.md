@@ -14,7 +14,7 @@ You can download a jar from GitHub's [releases page][3].
 
 Or use Gradle:
 ```gradle
-compile 'tech.gujin:toast-util:1.2.0'
+implementation 'tech.gujin:toast-util:1.2.0'
 ```
 
 How to use
